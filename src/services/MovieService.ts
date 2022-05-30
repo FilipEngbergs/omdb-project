@@ -9,4 +9,11 @@ export default class OmdbService {
     );
     return response.data.Search;
   }
+
+  async getMoviesBySearch(id: string): Promise<IMovie[]> {
+    const response = await axios.get<IOMDbResponse>(
+      "http://www.omdbapi.com/?apikey=ee348134&s=" + id
+    );
+    return response.data.Search;
+  }
 }

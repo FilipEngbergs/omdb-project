@@ -1,8 +1,8 @@
 import "./App.css";
-import { MainComponent } from "./components/MainComponent";
+import { Movies } from "./components/Movies";
 
 function App() {
-  return <MainComponent />;
+  return <Movies />;
 }
 
 export default App;

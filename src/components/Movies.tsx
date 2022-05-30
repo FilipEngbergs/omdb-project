@@ -1,35 +1,36 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { IMovie } from "../models/IMovie";
-import MovieService from "../services/MovieService";
+import { CouldNotFindMovie } from "./CouldNotFindMovie";
+import { GetMovies } from "./GetMovies";
+import { SearchMovies } from "./SearchMovies";
 
-interface PropsSetMovies {
-  movies: IMovie[];
-  showMovies(movies: IMovie[]): void;
-}
+export const Movies = () => {
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [userInput, setUserInput] = useState("");
+  const [findMovies, setfindMovies] = useState(true);
 
-export const Movies = (props: PropsSetMovies) => {
-  useEffect(() => {
-    if (props.movies.length !== 0) return;
-
-    let service = new MovieService();
-    service.getMovies().then((movies) => {
-      props.showMovies(movies);
-    });
-  });
+  function showMovies(movies: IMovie[]) {
+    setMovies(movies);
+  }
+  function getUserInput(input: string) {
+    setUserInput(input);
+  }
+  function movieCounter(movieCheck: boolean) {
+    setfindMovies(movieCheck);
+  }
 
   return (
     <>
-      <div>
-        {props.movies.map((m, index) => {
-          return (
-            <div key={index}>
-              <h1>{m.Title}</h1>
-              <img src={m.Poster} alt={m.Title} />
-              <p>{m.Year}</p>
-            </div>
-          );
-        })}
-      </div>
+      <SearchMovies
+        movieCounter={movieCounter}
+        setUserInput={getUserInput}
+        showMovies={showMovies}
+      />
+      {findMovies ? (
+        <GetMovies movies={movies} showMovies={showMovies} />
+      ) : (
+        <CouldNotFindMovie userSearch={userInput} />
+      )}
     </>
   );
 };
