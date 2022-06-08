@@ -9,11 +9,11 @@ export const Movies = () => {
   const [userInput, setUserInput] = useState("");
   const [findMovies, setfindMovies] = useState(true);
 
-  function showMovies(movies: IMovie[]) {
-    setMovies(movies);
-  }
   function getUserInput(input: string) {
     setUserInput(input);
+  }
+  function showMovies(movies: IMovie[]) {
+    setMovies(movies);
   }
   function movieCounter(movieCheck: boolean) {
     setfindMovies(movieCheck);

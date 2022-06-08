@@ -6,7 +6,7 @@ export const CouldNotFindMovie = (props: ICouldNotFindMovie) => {
     <>
       <div>
         <h1>No search results</h1>
-        <h2>Could not find a movie with name "{props.userSearch}".</h2>
+        <h2>Could not find a movie with the title "{props.userSearch}"</h2>
       </div>
     </>
   );
